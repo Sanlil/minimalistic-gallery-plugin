@@ -1,5 +1,5 @@
 /** 
-* stylistically-pure-gallery,js
+* minimalistic-gallery-plugin.js
 * The jQuery code for the Stylistically Pure Gallery Plugin
 * Sandra Liljeqvist 2013
 */
