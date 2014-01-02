@@ -1,24 +1,24 @@
 /** 
 * minimalistic-gallery-plugin.js
-* The jQuery code for the Stylistically Pure Gallery Plugin
-* Sandra Liljeqvist 2013
+* The jQuery code for the Minimalistic Gallery Plugin
+* Sandra Liljeqvist, 2013
 */
 
 (function ( $ ) {
 	$.fn.galleryPlugin = function(thumbColor) {
 		
+		// Adding elements the lightbox
 		$('#gallery').append("<div id='showImgDiv'><img id='showImg' src=''/><div id='clickable'><div id='left'><p>&lsaquo;</p></div><div id='right'><p>&rsaquo;</p></div></div><div id='textbar'></div></div><div id='overlay'></div>");
 		
 		return this.each(function() {
-			
 			var thisImgDiv = $(this);
 			var next, nextImg;
 			
+			// Adding thumbnail hover effect
 			$(this).append("<div class='thumbHover'></div>");
 			if (thumbColor) {
 				$('.thumbHover').css('background', thumbColor);
 			}
-			
 			$(this).hover(
 				function() {
 					console.log('hover');
@@ -28,6 +28,7 @@
 				}
 			);
 			
+			// Position the lightbox in the middle and set the size of clickable areas and arrows
 			var setPositions = function() {
 				var left = ($(window).width()-$('#showImg').outerWidth())/2;
 				var top = ($(window).height()-$('#showImg').outerHeight())/2;
@@ -40,6 +41,7 @@
 				$('#left p').css('margin-top', ($('#showImg').height()-$('#right p').outerHeight())/2+'px');
 			}
 			
+			// Set the size of the lightbox image to fit the window
 			var setImgSize = function(thumbnail) {
 				var imgSize = $(window).height()*0.9+'px';
 				if ( $(thumbnail).hasClass('portrait') ) {
@@ -53,23 +55,25 @@
 				}
 			}
 			
+			// On click on a thumbnail, open the lightbox
 			$(this).click( function() {
 				console.log('click thumbnail '+$(this).find('img').attr('src'));
 				console.log($(this).attr('id'));
+
+				// Set lightbox attributes
 				$('#showImg').attr('src', $(this).find('img').attr('src'));
 				$('#showImgDiv').fadeIn();
 				$('#overlay').fadeIn();
 				if ($(this).find('img').attr('alt')) {
 					$('#textbar').html('<p>'+$(this).find('img').attr('alt')+'<p>');
 					$('#textbar').show();
-				}
-				
+				}	
 				setImgSize(this);
 				setPositions();
 				
+				//Hide lightbox on click outside 
 				$('#overlay').click( function() {
 					console.log('hide');
-					//$('#showImgDiv').fadeOut();
 					$('#showImgDiv').hide();
 					$('#textbar').hide();
 					$('#overlay').fadeOut();
@@ -78,6 +82,7 @@
 					$('#overlay').off();
 				});
 				
+				// Show arrow on hover on the right part of the lightbox
 				$('#right').hover(
 					function() {
 						console.log('hover right');
@@ -87,6 +92,7 @@
 					}
 				);
 				
+				// Show arrow on hover on the left part of the lightbox
 				$('#left').hover(
 					function() {
 						console.log('hover left');
@@ -96,6 +102,7 @@
 					}
 				);
 				
+				// On click on the right side, change lightbox attributes to next image
 				$('#right').click( function() {
 					console.log('click right');
 					console.log(thisImgDiv.next().attr('id'));
@@ -118,6 +125,7 @@
 					}
 				});
 				
+				// On click on the left side, change lightbox attributes to previous image
 				$('#left').click( function() {
 					console.log('click left');
 					console.log(thisImgDiv.prev().attr('id'));
