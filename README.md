@@ -50,5 +50,4 @@ and feel free to submit your own code
 Author
 ------
 Sandra Liljeqvist  
-[sandra.liljeqvist.nu](http://sandra.liljeqvist.nu)  
 **Date:** 2014-01-01  
